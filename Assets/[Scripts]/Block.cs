@@ -11,9 +11,9 @@ public class Block : MonoBehaviour
         LEFT_DOWN = 2,
         RIGHT_DOWN = 3
     }
-
-
+    
     public Block[] m_blocks = new Block[4];
+    public int Index { set; get; }
     // Start is called before the first frame update
     void Start()
     {

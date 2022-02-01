@@ -22,6 +22,7 @@ public class Blocks : MonoBehaviour
             if(t.gameObject != this.gameObject)
             {
                 _blocks[i] = t.gameObject;
+                _blocks[i].GetComponent<Block>().Index = i;
                 i++;
             }
         }

@@ -4,37 +4,47 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [SerializeField]
-    private Blocks _blocksScript;
-
     private int m_currentPosition = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Character");
-        _blocksScript = GameManager.Instance().GetBlocksScript();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("7"))
-        {
-            Debug.Log("7");
-        }
-        if (Input.GetButtonDown("9"))
-        {
-            Debug.Log("9");
-        }
-        if (Input.GetButtonDown("1"))
-        {
-            Debug.Log("1");
-        }
-        if (Input.GetButtonDown("3"))
-        {
-            Debug.Log("3");
-        }
+       
+    }
 
+    public void MoveLeftUp()
+    {
+        Move(Block.Direction.LEFT_UP);
+    }
+    public void MoveRightUp()
+    {
+        Move(Block.Direction.RIGHT_UP);
+    }
+
+    public void MoveLeftDown()
+    {
+        Move(Block.Direction.LEFT_DOWN);
+    }
+    public void MoveRightDown()
+    {
+        Move(Block.Direction.RIGHT_DOWN);
+    }
+    private void Move(Block.Direction direction)
+    {
+        Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)direction)];
+        if (block != null)
+        {
+            transform.position = block.transform.position;
+            m_currentPosition = block.Index;
+        }
+    }
+    private Block GetBlockByIdx(int idx)
+    {
+        return GameManager.Instance().GetBlocksScript().GetBlocks()[m_currentPosition].GetComponent<Block>();
     }
 }
