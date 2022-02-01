@@ -6,9 +6,19 @@ public class Character : MonoBehaviour
 {
     private int m_currentPosition = 0;
 
+    private float _offsetOfPosition = 7;
+
     // Start is called before the first frame update
     void Start()
     {
+        Block block = GetBlockByIdx(m_currentPosition);
+        if (block != null)
+        {
+            Vector2 position = block.transform.position;
+            position.y += (block.transform.localScale.y / _offsetOfPosition);
+            transform.position = position;
+            m_currentPosition = block.Index;
+        }
     }
 
     // Update is called once per frame
@@ -39,7 +49,9 @@ public class Character : MonoBehaviour
         Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)direction)];
         if (block != null)
         {
-            transform.position = block.transform.position;
+            Vector2 position = block.transform.position;
+            position.y += (block.transform.localScale.y / _offsetOfPosition);
+            transform.position = position;
             m_currentPosition = block.Index;
         }
     }

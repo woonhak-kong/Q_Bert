@@ -10,16 +10,16 @@ public class Blocks : MonoBehaviour
     private GameObject[] _blocks;
     private Transform[] _transfrom;
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         _transfrom = GetComponentsInChildren<Transform>();
         _blocks = new GameObject[transform.childCount];
-        
+
         int i = 0;
         foreach (Transform t in _transfrom)
         {
-            if(t.gameObject != this.gameObject)
+            if (t.gameObject != this.gameObject)
             {
                 _blocks[i] = t.gameObject;
                 _blocks[i].GetComponent<Block>().Index = i;
@@ -27,6 +27,12 @@ public class Blocks : MonoBehaviour
             }
         }
 
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+       
 
     }
 

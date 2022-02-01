@@ -28,13 +28,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        _blocksScript = GameObject.Find("Blocks").gameObject.GetComponent<Blocks>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Manager");
-        _blocksScript = GameObject.Find("Blocks").gameObject.GetComponent<Blocks>();
+       
     }
 
     public Blocks GetBlocksScript()
