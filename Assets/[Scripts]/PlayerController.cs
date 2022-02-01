@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_player = GameObject.Find("Player").GetComponent<Character>();
+        //m_player = GameObject.Find("Player").GetComponent<Character>();
     }
 
     // Update is called once per frame
@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
             m_player.MoveLeftUp();
 
             Debug.Log("7");
+            
         }
         if (Input.GetButtonDown("9"))
         {
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("1"))
         {
             m_player.MoveLeftDown();
+            transform.GetChild(0).GetComponent<Animator>().SetBool("isJump", true);
             Debug.Log("1");
         }
         if (Input.GetButtonDown("3"))
