@@ -6,7 +6,8 @@ public class Character : MonoBehaviour
 {
     private int m_currentPosition = 0;
 
-    private float _offsetOfPosition = 7;
+    private float _offsetOfBlockPosition = 7;
+    private float _offsetOfPinpadPosition = 12;
 
     // Start is called before the first frame update
     void Start()
@@ -14,9 +15,7 @@ public class Character : MonoBehaviour
         Block block = GetBlockByIdx(m_currentPosition);
         if (block != null)
         {
-            Vector2 position = block.transform.position;
-            position.y += (block.transform.localScale.y / _offsetOfPosition);
-            transform.position = position;
+            SetPosition(block.transform);
             m_currentPosition = block.Index;
         }
     }
@@ -49,9 +48,7 @@ public class Character : MonoBehaviour
         Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)direction)];
         if (block != null)
         {
-            Vector2 position = block.transform.position;
-            position.y += (block.transform.localScale.y / _offsetOfPosition);
-            transform.position = position;
+            SetPosition(block.transform);
             m_currentPosition = block.Index;
             block.SetComplete();
         }
@@ -59,5 +56,21 @@ public class Character : MonoBehaviour
     private Block GetBlockByIdx(int idx)
     {
         return GameManager.Instance().GetBlocksScript().GetBlocks()[m_currentPosition].GetComponent<Block>();
+    }
+
+    private void SetPosition(Transform blockTransform)
+    {
+        Vector2 position = blockTransform.position;
+        if (blockTransform.gameObject.GetComponent<SpinPad>() != null)
+        {
+            position.y += (blockTransform.localScale.y / _offsetOfPinpadPosition);
+        }
+        else
+        {
+            position.y += (blockTransform.localScale.y / _offsetOfBlockPosition);
+        }
+        
+        transform.position = position;
+
     }
 }
