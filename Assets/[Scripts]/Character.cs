@@ -53,6 +53,7 @@ public class Character : MonoBehaviour
             position.y += (block.transform.localScale.y / _offsetOfPosition);
             transform.position = position;
             m_currentPosition = block.Index;
+            block.SetComplete();
         }
     }
     private Block GetBlockByIdx(int idx)

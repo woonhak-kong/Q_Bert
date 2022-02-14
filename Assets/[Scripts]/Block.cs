@@ -14,6 +14,8 @@ public class Block : MonoBehaviour
     
     public Block[] m_blocks = new Block[4];
     public int Index { set; get; }
+
+    private bool isComplete = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +26,23 @@ public class Block : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetComplete()
+    {
+        if (!isComplete)
+        {
+            isComplete = true;
+            Sprite[] SpritesData = Resources.LoadAll<Sprite>("Sprites/qbert");
+            foreach (Sprite sprite in SpritesData)
+            {
+                if (sprite.name == "block_yellow_1")
+                {
+                    GetComponent<SpriteRenderer>().sprite = sprite;
+                    break;
+                }
+            }
+        }
+
     }
 }
