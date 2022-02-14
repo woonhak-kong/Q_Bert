@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
             // selection of enemy
             float coefficient = Random.Range(0.0f, 1.0f);
             Debug.Log(coefficient);
-            if (coefficient > 0.66f)
+            if (coefficient > 0.20f)
             {
                 InstantiateRedBall();
             }
