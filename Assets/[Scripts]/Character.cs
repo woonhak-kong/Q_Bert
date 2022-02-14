@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    private int m_currentPosition = 0;
+    protected int m_currentPosition = 0;
 
     private float _offsetOfBlockPosition = 7;
     private float _offsetOfPinpadPosition = 12;
@@ -53,12 +53,13 @@ public class Character : MonoBehaviour
             block.SetComplete();
         }
     }
-    private Block GetBlockByIdx(int idx)
+    protected Block GetBlockByIdx(int idx)
     {
-        return GameManager.Instance().GetBlocksScript().GetBlocks()[m_currentPosition].GetComponent<Block>();
+        //return GameManager.Instance().GetBlocksScript().GetBlocks()[m_currentPosition].GetComponent<Block>();
+        return GameManager.Instance().GetBlocksScript().GetBlocks()[idx].GetComponent<Block>();
     }
 
-    private void SetPosition(Transform blockTransform)
+    protected void SetPosition(Transform blockTransform)
     {
         Vector2 position = blockTransform.position;
         if (blockTransform.gameObject.GetComponent<SpinPad>() != null)
@@ -69,7 +70,8 @@ public class Character : MonoBehaviour
         {
             position.y += (blockTransform.localScale.y / _offsetOfBlockPosition);
         }
-        
+
+        Debug.Log(blockTransform.gameObject.name);
         transform.position = position;
 
     }
