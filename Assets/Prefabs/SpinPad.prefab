@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 701530288360100371}
   - component: {fileID: 701530288360100372}
   - component: {fileID: 701530288360100373}
+  - component: {fileID: 7624094542267201406}
   m_Layer: 0
   m_Name: SpinPad
   m_TagString: Untagged
@@ -102,3 +103,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7624094542267201406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701530288360100374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 498907aae1ebd864d8995e4ca78d8a43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_blocks:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

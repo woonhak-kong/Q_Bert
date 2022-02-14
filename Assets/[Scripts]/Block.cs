@@ -15,20 +15,10 @@ public class Block : MonoBehaviour
     public Block[] m_blocks = new Block[4];
     public int Index { set; get; }
 
-    private bool isComplete = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    protected bool isComplete = false;
+  
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void SetComplete()
+    public virtual void SetComplete()
     {
         if (!isComplete)
         {
