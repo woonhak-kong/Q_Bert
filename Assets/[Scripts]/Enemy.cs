@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    void Start()
+    public override void Start()
     {
         //Debug.Log("in Enemy");
 

@@ -12,7 +12,7 @@ public class Character : MonoBehaviour
     protected bool isAlive = true;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         Block block = GetBlockByIdx(m_currentPosition);
         if (block != null)

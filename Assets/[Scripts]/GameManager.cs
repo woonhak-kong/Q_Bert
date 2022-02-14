@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject redball;
     public GameObject greenBall;
+    public GameObject snake;
 
     [SerializeField]
     private Blocks _blocksScript;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     private bool _isPlayingGame = false;
 
+    public int NumOfSnake { get; set; }
 
 
     private GameManager(){}
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _isPlayingGame = true;
+        NumOfSnake = 0;
         //_enemySpawnCoroutine = EnemySpawn();
         StartCoroutine(EnemySpawn());
     }
@@ -52,22 +55,35 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator EnemySpawn()
     {
+        int snakeReady = 0;
+
+        //yield return new WaitForSeconds(3.0f);
         while (_isPlayingGame)
         {
             yield return new WaitForSeconds(2.2f);
-            // todo 
-            // selection of enemy
-            float coefficient = Random.Range(0.0f, 1.0f);
-            Debug.Log(coefficient);
-            if (coefficient > 0.20f)
+
+            if (NumOfSnake <= 0 && snakeReady >= 3) // if there is no snake
             {
-                InstantiateRedBall();
+                //make snake
+                InstantiateSnake();
+                snakeReady = 0;
             }
             else
             {
-                InstantiateGreenBall();
+                float coefficient = Random.Range(0.0f, 1.0f);
+
+                //Debug.Log(coefficient);
+                if (coefficient > 0.20f)
+                {
+                    InstantiateRedBall();
+                }
+                else
+                {
+                    InstantiateGreenBall();
+                }
+                snakeReady++;
             }
-            
+         
         }
 
     }
@@ -81,6 +97,13 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(greenBall);
     }
+
+    private void InstantiateSnake()
+    {
+        Instantiate(snake);
+    }
+
+
 
     public void GameComplete()
     {
