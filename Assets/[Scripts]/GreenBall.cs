@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedBall : Enemy
+public class GreenBall : Enemy
 {
    
 

@@ -5,13 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject redball;
+    public GameObject greenBall;
 
     [SerializeField]
     private Blocks _blocksScript;
 
     private static GameManager instance = null;
-
-    private Coroutine _enemySpawnCoroutine = null;
 
     private bool _isPlayingGame = false;
 
@@ -55,10 +54,20 @@ public class GameManager : MonoBehaviour
     {
         while (_isPlayingGame)
         {
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(2.2f);
             // todo 
             // selection of enemy
-            InstantiateRedBall();
+            float coefficient = Random.Range(0.0f, 1.0f);
+            Debug.Log(coefficient);
+            if (coefficient > 0.66f)
+            {
+                InstantiateRedBall();
+            }
+            else
+            {
+                InstantiateGreenBall();
+            }
+            
         }
 
     }
@@ -66,6 +75,11 @@ public class GameManager : MonoBehaviour
     private void InstantiateRedBall()
     {
         Instantiate(redball);
+    }
+
+    private void InstantiateGreenBall()
+    {
+        Instantiate(greenBall);
     }
 
     public void GameComplete()
