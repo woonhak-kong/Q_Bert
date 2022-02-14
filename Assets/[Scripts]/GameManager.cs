@@ -67,4 +67,9 @@ public class GameManager : MonoBehaviour
     {
         Instantiate(redball);
     }
+
+    public void GameComplete()
+    {
+        _isPlayingGame = false;
+    }
 }

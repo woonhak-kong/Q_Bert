@@ -9,6 +9,8 @@ public class Character : MonoBehaviour
     private float _offsetOfBlockPosition = 7;
     private float _offsetOfPinpadPosition = 12;
 
+    protected bool isAlive = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +52,10 @@ public class Character : MonoBehaviour
         {
             SetPosition(block.transform);
             m_currentPosition = block.Index;
-            block.SetComplete();
+            if (tag == "Player")
+            {
+                block.SetComplete();
+            }
         }
     }
     protected Block GetBlockByIdx(int idx)
@@ -71,7 +76,7 @@ public class Character : MonoBehaviour
             position.y += (blockTransform.localScale.y / _offsetOfBlockPosition);
         }
 
-        Debug.Log(blockTransform.gameObject.name);
+        //Debug.Log(blockTransform.gameObject.name);
         transform.position = position;
 
     }
