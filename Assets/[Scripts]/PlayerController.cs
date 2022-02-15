@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("1"))
         {
             m_player.MoveLeftDown();
-            transform.GetChild(0).GetComponent<Animator>().SetBool("isJump", true);
             //Debug.Log("1");
         }
         if (Input.GetButtonDown("3"))

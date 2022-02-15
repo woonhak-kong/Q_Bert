@@ -6,14 +6,14 @@ public class Character : MonoBehaviour
 {
     protected int m_currentPosition = 0;
 
-    private float _offsetOfBlockPosition = 7;
-    private float _offsetOfPinpadPosition = 12;
+    protected float _offsetOfBlockPosition = 7;
+    protected float _offsetOfPinpadPosition = 12;
 
     protected bool isAlive = true;
     protected bool isJumping = false;
 
-    private float ElapsedTime = 0;
-    private float FinishTime = 15.0f;
+    protected float ElapsedTime = 0;
+    protected float FinishTime = 15.0f;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -32,20 +32,20 @@ public class Character : MonoBehaviour
        
     }
 
-    public void MoveLeftUp()
+    public virtual void MoveLeftUp()
     {
         Move(Block.Direction.LEFT_UP);
     }
-    public void MoveRightUp()
+    public virtual void MoveRightUp()
     {
         Move(Block.Direction.RIGHT_UP);
     }
 
-    public void MoveLeftDown()
+    public virtual void MoveLeftDown()
     {
         Move(Block.Direction.LEFT_DOWN);
     }
-    public void MoveRightDown()
+    public virtual void MoveRightDown()
     {
         Move(Block.Direction.RIGHT_DOWN);
     }
@@ -58,7 +58,7 @@ public class Character : MonoBehaviour
             {
                 SetPosition(block.transform);
                 m_currentPosition = block.Index;
-                Debug.Log("setCom!  " + m_currentPosition);
+                //Debug.Log("setCom!  " + m_currentPosition);
                 //if (tag == "Player")
                 //{
                 //    block.SetComplete();
@@ -97,7 +97,7 @@ public class Character : MonoBehaviour
 
     }
 
-    private IEnumerator MoveToPosition(Transform target)
+    protected virtual IEnumerator MoveToPosition(Transform target)
     {
         isJumping = true;
 
