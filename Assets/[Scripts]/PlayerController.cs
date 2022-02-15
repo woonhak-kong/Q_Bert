@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Character m_player;
+    public Player m_player;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,24 +18,24 @@ public class PlayerController : MonoBehaviour
         {
             m_player.MoveLeftUp();
 
-            Debug.Log("7");
+            //Debug.Log("7");
             
         }
         if (Input.GetButtonDown("9"))
         {
             m_player.MoveRightUp();
-            Debug.Log("9");
+            //Debug.Log("9");
 
         }
         if (Input.GetButtonDown("1"))
         {
             m_player.MoveLeftDown();
             transform.GetChild(0).GetComponent<Animator>().SetBool("isJump", true);
-            Debug.Log("1");
+            //Debug.Log("1");
         }
         if (Input.GetButtonDown("3"))
         {
-            Debug.Log("3");
+            //Debug.Log("3");
             m_player.MoveRightDown();
         }
     }

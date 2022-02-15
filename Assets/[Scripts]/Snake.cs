@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Snake : Enemy
 {
+    private Animator _animator;
   
     public bool IsHatched { get; set; }
 
@@ -12,6 +13,8 @@ public class Snake : Enemy
         base.Start();
         GameManager.Instance().NumOfSnake++;
         IsHatched = false;
+        _animator = GetComponent<Animator>();
+
     }
 
     protected override IEnumerator StartAI()
@@ -43,12 +46,14 @@ public class Snake : Enemy
                     isAlive = false;
                     //GameManager.Instance().NumOfSnake--;
                     //Destroy(gameObject);
+                    _animator.SetBool("IsHatched", true);
+                    IsHatched = true;
                 }
             }
             // Hatched!! it is snake now!
             else
             {
-
+               
             }
         }
     }

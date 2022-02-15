@@ -10,6 +10,10 @@ public class Character : MonoBehaviour
     private float _offsetOfPinpadPosition = 12;
 
     protected bool isAlive = true;
+    protected bool isJumping = false;
+
+    private float ElapsedTime = 0;
+    private float FinishTime = 15.0f;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -47,14 +51,19 @@ public class Character : MonoBehaviour
     }
     private void Move(Block.Direction direction)
     {
-        Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)direction)];
-        if (block != null)
+        if (!isJumping)
         {
-            SetPosition(block.transform);
-            m_currentPosition = block.Index;
-            if (tag == "Player")
+            Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)direction)];
+            if (block != null)
             {
-                block.SetComplete();
+                SetPosition(block.transform);
+                m_currentPosition = block.Index;
+                Debug.Log("setCom!  " + m_currentPosition);
+                //if (tag == "Player")
+                //{
+                //    block.SetComplete();
+                    
+                //}
             }
         }
     }
@@ -66,6 +75,15 @@ public class Character : MonoBehaviour
 
     protected void SetPosition(Transform blockTransform)
     {
+       
+        //Debug.Log(blockTransform.gameObject.name);
+        StartCoroutine(MoveToPosition(blockTransform));
+        //transform.position = position;
+
+    }
+
+    protected void SetPositionImediately(Transform blockTransform)
+    {
         Vector2 position = blockTransform.position;
         if (blockTransform.gameObject.GetComponent<SpinPad>() != null)
         {
@@ -75,9 +93,45 @@ public class Character : MonoBehaviour
         {
             position.y += (blockTransform.localScale.y / _offsetOfBlockPosition);
         }
-
-        //Debug.Log(blockTransform.gameObject.name);
         transform.position = position;
 
+    }
+
+    private IEnumerator MoveToPosition(Transform target)
+    {
+        isJumping = true;
+
+        Vector2 position = target.position;
+        if (target.gameObject.GetComponent<SpinPad>() != null)
+        {
+            position.y += (target.localScale.y / _offsetOfPinpadPosition);
+        }
+        else
+        {
+            position.y += (target.localScale.y / _offsetOfBlockPosition);
+        }
+
+
+        while (isJumping)
+        {
+            //transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime);
+            ElapsedTime += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, position, ElapsedTime / FinishTime);
+
+            yield return null;
+            if (Vector3.Distance(transform.position, position) < 0.01f)
+            {
+                //Debug.Log("arrived!");
+                isJumping = false;
+                ElapsedTime = 0;
+                if (tag == "Player")
+                {
+                    target.GetComponent<Block>().SetComplete();
+                    //block.SetComplete();
+
+                }
+            }
+           
+        }
     }
 }
