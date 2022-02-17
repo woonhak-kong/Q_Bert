@@ -13,7 +13,9 @@ public class Character : MonoBehaviour
     protected bool isJumping = false;
 
     protected float ElapsedTime = 0;
-    protected float FinishTime = 15.0f;
+    protected float FinishTime = 0.5f;
+
+    protected Animator _animator;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -24,6 +26,7 @@ public class Character : MonoBehaviour
             SetPosition(block.transform);
             m_currentPosition = block.Index;
         }
+
     }
 
     // Update is called once per frame
@@ -56,6 +59,22 @@ public class Character : MonoBehaviour
             Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)direction)];
             if (block != null)
             {
+                switch (direction)
+                {
+                    case Block.Direction.LEFT_UP:
+                        _animator.SetBool("LeftUpJump", true);
+                        break;
+                    case Block.Direction.RIGHT_UP:
+                        _animator.SetBool("RightUpJump", true);
+                        break;
+                    case Block.Direction.LEFT_DOWN:
+                        _animator.SetBool("LeftDownJump", true);
+                        break;
+                    case Block.Direction.RIGHT_DOWN:
+                        _animator.SetBool("RightDownJump", true);
+                        break;
+                }
+
                 SetPosition(block.transform);
                 m_currentPosition = block.Index;
                 //Debug.Log("setCom!  " + m_currentPosition);
@@ -101,7 +120,9 @@ public class Character : MonoBehaviour
     {
         isJumping = true;
 
+        Vector3 currentPosition = transform.position;
         Vector2 position = target.position;
+
         if (target.gameObject.GetComponent<SpinPad>() != null)
         {
             position.y += (target.localScale.y / _offsetOfPinpadPosition);
@@ -114,16 +135,16 @@ public class Character : MonoBehaviour
 
         while (isJumping)
         {
-            //transform.position = Vector3.MoveTowards(transform.position, target, Time.deltaTime);
             ElapsedTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, position, ElapsedTime / FinishTime);
+            transform.position = Vector3.Lerp(currentPosition, position, (ElapsedTime / FinishTime));
 
             yield return null;
-            if (Vector3.Distance(transform.position, position) < 0.01f)
+            if (Vector3.Distance(transform.position, position) < 0.0001f)
             {
                 //Debug.Log("arrived!");
                 isJumping = false;
                 ElapsedTime = 0;
+                SetPrivateProperties();
                 if (tag == "Player")
                 {
                     target.GetComponent<Block>().SetComplete();
@@ -133,5 +154,10 @@ public class Character : MonoBehaviour
             }
            
         }
+    }
+
+    protected virtual void SetPrivateProperties()
+    {
+
     }
 }
