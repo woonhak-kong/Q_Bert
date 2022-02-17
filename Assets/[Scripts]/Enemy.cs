@@ -13,6 +13,7 @@ public class Enemy : Character
         Block block = GetBlockByIdx(position);
         if (block != null)
         {
+            transform.position = block.transform.position + Vector3.up * 4;
             SetPosition(block.transform);
             m_currentPosition = block.Index;
         }
