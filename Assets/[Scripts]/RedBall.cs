@@ -20,4 +20,10 @@ public class RedBall : Enemy
         SetAnimatorPropertyDefault();
 
     }
+    protected override void SetEnemyBehaviorWhenAIDone()
+    {
+        base.SetEnemyBehaviorWhenAIDone();
+        isAlive = false;
+        Destroy(gameObject);
+    }
 }

@@ -40,9 +40,14 @@ public class Enemy : Character
             }
             else
             {
-                isAlive = false;
-                Destroy(gameObject);
+                SetEnemyBehaviorWhenAIDone();
+                break;
             }
         }
+    }
+
+    protected virtual void SetEnemyBehaviorWhenAIDone()
+    {
+
     }
 }

@@ -20,4 +20,11 @@ public class GreenBall : Enemy
         SetAnimatorPropertyDefault();
 
     }
+
+    protected override void SetEnemyBehaviorWhenAIDone()
+    {
+        base.SetEnemyBehaviorWhenAIDone();
+        isAlive = false;
+        Destroy(gameObject);
+    }
 }
