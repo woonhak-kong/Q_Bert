@@ -20,7 +20,6 @@ public class MainMenuUIController : MonoBehaviour
     public void OnClickStart()
     {
         SceneManager.LoadScene("PlayScene");
-        SoundManager.Instance.PlaySound(Sounds.StartSound);
     }
 
     public void OnClickExit()

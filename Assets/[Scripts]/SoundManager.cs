@@ -70,7 +70,7 @@ public class SoundManager : MonoBehaviour
         }
         else if (scene.name == "PlayScene")
         {
-            //_audioSource.PlayOneShot(_audioClips[Sounds.Speech1]);
+            SoundManager.Instance.PlaySound(Sounds.StartSound);
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,16 +38,29 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        _blocksScript = GameObject.Find("Blocks").gameObject.GetComponent<Blocks>();
+        
+    }
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "PlayScene")
+        {
+            _blocksScript = GameObject.Find("Blocks").gameObject.GetComponent<Blocks>();
+            _isPlayingGame = true;
+            NumOfSnake = 0;
+            //_enemySpawnCoroutine = EnemySpawn();
+            StartCoroutine(EnemySpawn());
+        }
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
-        _isPlayingGame = true;
-        NumOfSnake = 0;
-        //_enemySpawnCoroutine = EnemySpawn();
-        StartCoroutine(EnemySpawn());
+        
     }
 
     public Blocks GetBlocksScript()
@@ -107,6 +121,11 @@ public class GameManager : MonoBehaviour
 
 
     public void GameComplete()
+    {
+        _isPlayingGame = false;
+    }
+
+    public void GameStop()
     {
         _isPlayingGame = false;
     }
