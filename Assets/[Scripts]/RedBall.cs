@@ -18,6 +18,7 @@ public class RedBall : Enemy
     {
         base.SetPrivateProperties();
         SetAnimatorPropertyDefault();
+        SoundManager.Instance.PlaySound(Sounds.JellyJump);
 
     }
     protected override void SetEnemyBehaviorWhenAIDone()

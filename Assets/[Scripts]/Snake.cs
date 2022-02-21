@@ -57,6 +57,15 @@ public class Snake : Enemy
         base.SetPrivateProperties();
         //block.SetComplete();
         SetAnimatorPropertyDefault();
+
+        if (IsHatched)
+        {
+            SoundManager.Instance.PlaySound(Sounds.CoilJump);
+        }
+        else
+        {
+            SoundManager.Instance.PlaySound(Sounds.JellyJump);
+        }
     }
 
     protected override void SetEnemyBehaviorWhenAIDone()

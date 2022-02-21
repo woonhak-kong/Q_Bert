@@ -18,7 +18,7 @@ public class GreenBall : Enemy
     {
         base.SetPrivateProperties();
         SetAnimatorPropertyDefault();
-
+        SoundManager.Instance.PlaySound(Sounds.JellyJump);
     }
 
     protected override void SetEnemyBehaviorWhenAIDone()

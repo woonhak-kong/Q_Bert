@@ -12,6 +12,7 @@ public class Sounds
 
     public static string QbertJump = "Sounds/qbert_jump";
     public static string JellyJump = "Sounds/JellyJump";
+    public static string CoilJump = "Sounds/CoilJump";
 }
 
 
@@ -56,6 +57,7 @@ public class SoundManager : MonoBehaviour
         AddSounds(Sounds.Speech1);
         AddSounds(Sounds.JellyJump);
         AddSounds(Sounds.QbertJump);
+        AddSounds(Sounds.CoilJump);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
