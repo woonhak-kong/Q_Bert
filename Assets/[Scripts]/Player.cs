@@ -104,5 +104,6 @@ public class Player : Character
         base.SetPrivateProperties();
         //block.SetComplete();
         SetAnimatorPropertyDefault();
+        SoundManager.Instance.PlaySound(Sounds.QbertJump);
     }
 }

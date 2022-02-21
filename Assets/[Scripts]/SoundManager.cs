@@ -9,6 +9,9 @@ public class Sounds
     public static string StartSound = "Sounds/level-start";
     public static string Hello = "Sounds/hello";
     public static string Speech1 = "Sounds/speech-2";
+
+    public static string QbertJump = "Sounds/qbert_jump";
+    public static string JellyJump = "Sounds/JellyJump";
 }
 
 
@@ -51,6 +54,8 @@ public class SoundManager : MonoBehaviour
         AddSounds(Sounds.StartSound);
         AddSounds(Sounds.Hello);
         AddSounds(Sounds.Speech1);
+        AddSounds(Sounds.JellyJump);
+        AddSounds(Sounds.QbertJump);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
