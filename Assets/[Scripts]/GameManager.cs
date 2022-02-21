@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public int NumOfSnake { get; set; }
 
 
+
     private GameManager(){}
     public static GameManager Instance()
     {
