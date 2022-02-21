@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : Character
 {
+    protected float m_Speed;
+
     public override void Start()
     {
         //Debug.Log("in Enemy");
@@ -18,13 +20,14 @@ public class Enemy : Character
             m_currentPosition = block.Index;
         }
 
+        m_Speed = Random.Range(0.5f, 1.0f);
         StartCoroutine(StartAI());
     }
     protected virtual IEnumerator StartAI()
     {
         while (isAlive)
         {
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(m_Speed);
             Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)Block.Direction.RIGHT_DOWN)];
 
             if (block != null)

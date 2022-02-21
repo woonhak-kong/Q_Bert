@@ -13,8 +13,6 @@ public class Snake : Enemy
         GameManager.Instance().NumOfSnake++;
         IsHatched = false;
         _animator = transform.GetChild(0).GetComponent<Animator>();
-        Debug.Log(_animator);
-
     }
 
     private IEnumerator StartSnakeAI()
