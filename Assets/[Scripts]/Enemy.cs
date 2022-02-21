@@ -20,7 +20,7 @@ public class Enemy : Character
             m_currentPosition = block.Index;
         }
 
-        m_Speed = Random.Range(0.5f, 1.0f);
+        m_Speed = Random.Range(0.6f, 1.0f);
         StartCoroutine(StartAI());
     }
     protected virtual IEnumerator StartAI()
