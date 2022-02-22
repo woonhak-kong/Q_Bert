@@ -52,7 +52,7 @@ public class Character : MonoBehaviour
     {
         Move(Block.Direction.RIGHT_DOWN);
     }
-    private void Move(Block.Direction direction)
+    protected void Move(Block.Direction direction)
     {
         if (!isJumping)
         {
@@ -158,6 +158,5 @@ public class Character : MonoBehaviour
 
     protected virtual void SetPrivateProperties()
     {
-
     }
 }

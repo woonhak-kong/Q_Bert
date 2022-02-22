@@ -16,7 +16,14 @@ public class Block : MonoBehaviour
     public int Index { set; get; }
 
     protected bool isComplete = false;
-  
+
+    private float _distanceFromPlayer = 0.0f;
+
+    public float DistanceFromPlayer
+    {
+        set => _distanceFromPlayer = value;
+        get => _distanceFromPlayer;
+    }
 
     public virtual void SetComplete()
     {

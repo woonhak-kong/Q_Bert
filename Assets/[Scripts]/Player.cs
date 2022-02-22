@@ -12,6 +12,7 @@ public class Player : Character
         {
             SetPositionImediately(block.transform);
             m_currentPosition = block.Index;
+            GameManager.Instance().SetDistanceBetweenPlayerAndBlocks();
         }
         _animator = transform.GetChild(0).GetComponent<Animator>();
     }
@@ -105,5 +106,6 @@ public class Player : Character
         //block.SetComplete();
         SetAnimatorPropertyDefault();
         SoundManager.Instance.PlaySound(Sounds.QbertJump);
+        GameManager.Instance().SetDistanceBetweenPlayerAndBlocks();
     }
 }

@@ -23,20 +23,36 @@ public class Snake : Enemy
             yield return new WaitForSeconds(1.0f);
 
             // it is not snake yet.
-            Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)Block.Direction.RIGHT_UP)];
+            //Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)Block.Direction.RIGHT_UP)];
 
-            if (block != null)
+            float dist = float.MaxValue;
+            int shortestIdx = 0;
+            for (int i = 0; i < 4; i++)
             {
-                int nextPosition = Random.Range(1, 3); // nerve return 3
-                if (nextPosition == 1)
+                Block block = GetBlockByIdx(m_currentPosition).m_blocks[i];
+                if (block != null)
                 {
-                    MoveLeftUp();
-                }
-                else
-                {
-                    MoveRightUp();
+                    if (dist > block.DistanceFromPlayer)
+                    {
+                        dist = block.DistanceFromPlayer;
+                        shortestIdx = i;
+                    }
                 }
             }
+
+            Move((Block.Direction)shortestIdx);
+            //if (block != null)
+            //{
+            //    int nextPosition = Random.Range(1, 3); // nerve return 3
+            //    if (nextPosition == 1)
+            //    {
+            //        MoveLeftUp();
+            //    }
+            //    else
+            //    {
+            //        MoveRightUp();
+            //    }
+            //}
 
         }
     }

@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Blocks _blocksScript;
 
+    private GameObject _playerPosition;
+
     private static GameManager instance = null;
 
     private bool _isPlayingGame = false;
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
             NumOfSnake = 0;
             //_enemySpawnCoroutine = EnemySpawn();
             StartCoroutine(EnemySpawn());
+            _playerPosition = GameObject.Find("PlayerPosition");
         }
         
     }
@@ -128,5 +131,15 @@ public class GameManager : MonoBehaviour
     public void GameStop()
     {
         _isPlayingGame = false;
+    }
+
+    public void SetDistanceBetweenPlayerAndBlocks()
+    {
+        GameObject[] blocks = GetBlocksScript().GetBlocks();
+        foreach (GameObject obj in blocks)
+        {
+            float distance = Vector2.Distance(obj.transform.position, _playerPosition.transform.position);
+            obj.GetComponent<Block>().DistanceFromPlayer = distance;
+        }
     }
 }
