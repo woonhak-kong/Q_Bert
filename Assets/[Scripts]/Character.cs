@@ -95,17 +95,16 @@ public class Character : MonoBehaviour
                     block.GetComponent<SpinPad>().StartSpinpadSequences(() =>
                     {
                         isOnSpinPad = false;
+                        MoveLeftDown();
                         if (block.name == "SpinPadLeft")
                         {
-
-                            MoveRightDown();
                             GetBlockByIdx(previousIdx).m_blocks[(int)Block.Direction.LEFT_UP] = null;
                         }
                         else if (block.name == "SpinPadRight")
                         {
-                            MoveLeftDown();
                             GetBlockByIdx(previousIdx).m_blocks[(int)Block.Direction.RIGHT_UP] = null;
                         }
+                        
                         transform.parent = GameObject.Find("SceneObject").transform;
                         Destroy(block.gameObject);
                     });
