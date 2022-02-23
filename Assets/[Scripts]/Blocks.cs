@@ -34,8 +34,4 @@ public class Blocks : MonoBehaviour
         return _blocks;
     }
 
-    public void RemoveBlock(Block block)
-    {
-
-    }
 }

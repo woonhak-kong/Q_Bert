@@ -138,8 +138,11 @@ public class GameManager : MonoBehaviour
         GameObject[] blocks = GetBlocksScript().GetBlocks();
         foreach (GameObject obj in blocks)
         {
-            float distance = Vector2.Distance(obj.transform.position, _playerPosition.transform.position);
-            obj.GetComponent<Block>().DistanceFromPlayer = distance;
+            if (obj != null)
+            {
+                float distance = Vector2.Distance(obj.transform.position, _playerPosition.transform.position);
+                obj.GetComponent<Block>().DistanceFromPlayer = distance;
+            }
         }
     }
 }
