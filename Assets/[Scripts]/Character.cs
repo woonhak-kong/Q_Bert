@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public delegate void Callback();
+
 public class Character : MonoBehaviour
 {
+    
     protected int m_currentPosition = 0;
 
     protected float _offsetOfBlockPosition = 7;
@@ -11,6 +15,7 @@ public class Character : MonoBehaviour
 
     protected bool isAlive = true;
     protected bool isJumping = false;
+    protected bool isOnSpinPad = false;
 
     protected float ElapsedTime = 0;
     protected float FinishTime = 0.5f;
@@ -54,6 +59,9 @@ public class Character : MonoBehaviour
     }
     protected void Move(Block.Direction direction)
     {
+        if (isOnSpinPad)
+            return;
+
         if (!isJumping)
         {
             Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)direction)];
@@ -76,7 +84,33 @@ public class Character : MonoBehaviour
                 }
 
                 SetPosition(block.transform);
+
+                int previousIdx = m_currentPosition;
                 m_currentPosition = block.Index;
+                if (block.tag == "Spinpad")
+                {
+                    isOnSpinPad = true;
+                    transform.parent = block.transform;
+
+                    block.GetComponent<SpinPad>().StartSpinpadSequences(() =>
+                    {
+                        isOnSpinPad = false;
+                        if (block.name == "SpinPadLeft")
+                        {
+
+                            MoveRightDown();
+                            GetBlockByIdx(previousIdx).m_blocks[(int)Block.Direction.LEFT_UP] = null;
+                        }
+                        else if (block.name == "SpinPadRight")
+                        {
+                            MoveLeftDown();
+                            GetBlockByIdx(previousIdx).m_blocks[(int)Block.Direction.RIGHT_UP] = null;
+                        }
+                        transform.parent = GameObject.Find("SceneObject").transform;
+                        Destroy(block.gameObject);
+                    });
+                    
+                }
                 //Debug.Log("setCom!  " + m_currentPosition);
                 //if (tag == "Player")
                 //{
@@ -159,4 +193,5 @@ public class Character : MonoBehaviour
     protected virtual void SetPrivateProperties()
     {
     }
+
 }
