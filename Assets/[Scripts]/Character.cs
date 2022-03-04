@@ -65,8 +65,12 @@ public class Character : MonoBehaviour
         if (!isJumping)
         {
             Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)direction)];
+
             if (block != null)
             {
+                if (block.tag == "Spinpad" && this.tag != "Player")
+                    return;
+
                 switch (direction)
                 {
                     case Block.Direction.LEFT_UP:
@@ -83,19 +87,23 @@ public class Character : MonoBehaviour
                         break;
                 }
 
+                // moving to next block
                 SetPosition(block.transform);
+
 
                 int previousIdx = m_currentPosition;
                 m_currentPosition = block.Index;
-                if (block.tag == "Spinpad")
+                if (block.tag == "Spinpad" && this.tag == "Player")
                 {
                     isOnSpinPad = true;
                     transform.parent = block.transform;
+
 
                     block.GetComponent<SpinPad>().StartSpinpadSequences(() =>
                     {
                         isOnSpinPad = false;
                         MoveLeftDown();
+
                         if (block.name == "SpinPadLeft")
                         {
                             GetBlockByIdx(previousIdx).m_blocks[(int)Block.Direction.LEFT_UP] = null;
@@ -104,11 +112,10 @@ public class Character : MonoBehaviour
                         {
                             GetBlockByIdx(previousIdx).m_blocks[(int)Block.Direction.RIGHT_UP] = null;
                         }
-                        
+
                         transform.parent = GameObject.Find("SceneObject").transform;
                         Destroy(block.gameObject);
                     });
-                    
                 }
                 //Debug.Log("setCom!  " + m_currentPosition);
                 //if (tag == "Player")
@@ -122,7 +129,8 @@ public class Character : MonoBehaviour
     protected Block GetBlockByIdx(int idx)
     {
         //return GameManager.Instance().GetBlocksScript().GetBlocks()[m_currentPosition].GetComponent<Block>();
-        return GameManager.Instance().GetBlocksScript().GetBlocks()[idx].GetComponent<Block>();
+        GameObject obj = GameManager.Instance().GetBlocksScript().GetBlocks()[idx];
+        return obj.GetComponent<Block>();
     }
 
     protected void SetPosition(Transform blockTransform)
