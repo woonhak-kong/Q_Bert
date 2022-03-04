@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Sounds
 {
+    public static string TitleBGM = "Sounds/Title";
+    public static string PlayBGM = "Sounds/LevelMusic1";
     public static string StartSound = "Sounds/level-start";
     public static string Hello = "Sounds/hello";
     public static string Speech1 = "Sounds/speech-2";
@@ -54,6 +56,8 @@ public class SoundManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         _audioSource = GetComponent<AudioSource>();
+        AddSounds(Sounds.TitleBGM);
+        AddSounds(Sounds.PlayBGM);
         AddSounds(Sounds.StartSound);
         AddSounds(Sounds.Hello);
         AddSounds(Sounds.Speech1);
