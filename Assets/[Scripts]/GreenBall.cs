@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GreenBall : Enemy
+public class GreenBall : Enemy, Observer
 {
     public override void Start()
     {
         base.Start();
         _animator = transform.GetChild(0).GetComponent<Animator>();
+        GameManager.Instance().AddObserver(this);
     }
     private void SetAnimatorPropertyDefault()
     {
@@ -24,7 +25,15 @@ public class GreenBall : Enemy
     protected override void SetEnemyBehaviorWhenAIDone()
     {
         base.SetEnemyBehaviorWhenAIDone();
-        isAlive = false;
-        Destroy(gameObject);
+        GameManager.Instance().RemoveObserver(this);
+        DestroyMySelf();
+    }
+
+
+
+    public void Notify()
+    {
+        //destory
+        DestroyMySelf();
     }
 }

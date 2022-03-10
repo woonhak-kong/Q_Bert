@@ -5,17 +5,18 @@ using UnityEngine;
 
 public delegate void Callback();
 
-public class Character : MonoBehaviour, Observer
+public class Character : MonoBehaviour
 {
     
     protected int m_currentPosition = 0;
+    protected int m_previousIdx = 0;
 
     protected float _offsetOfBlockPosition = 7;
     protected float _offsetOfPinpadPosition = 12;
 
-    protected bool isAlive = true;
-    protected bool isJumping = false;
-    protected bool isOnSpinPad = false;
+    public bool isAlive = true;
+    public bool isJumping = false;
+    public bool isOnSpinPad = false;
 
     protected float ElapsedTime = 0;
     protected float FinishTime = 0.5f;
@@ -91,7 +92,7 @@ public class Character : MonoBehaviour, Observer
                 SetPosition(block.transform);
 
 
-                int previousIdx = m_currentPosition;
+                m_previousIdx = m_currentPosition;
                 m_currentPosition = block.Index;
                 if (block.tag == "Spinpad" && this.tag == "Player")
                 {
@@ -106,11 +107,11 @@ public class Character : MonoBehaviour, Observer
 
                         if (block.name == "SpinPadLeft")
                         {
-                            GetBlockByIdx(previousIdx).m_blocks[(int)Block.Direction.LEFT_UP] = null;
+                            GetBlockByIdx(m_previousIdx).m_blocks[(int)Block.Direction.LEFT_UP] = null;
                         }
                         else if (block.name == "SpinPadRight")
                         {
-                            GetBlockByIdx(previousIdx).m_blocks[(int)Block.Direction.RIGHT_UP] = null;
+                            GetBlockByIdx(m_previousIdx).m_blocks[(int)Block.Direction.RIGHT_UP] = null;
                         }
 
                         transform.parent = GameObject.Find("SceneObject").transform;
@@ -183,9 +184,7 @@ public class Character : MonoBehaviour, Observer
             if (Vector3.Distance(transform.position, position) < 0.0001f)
             {
                 //Debug.Log("arrived!");
-                isJumping = false;
-                ElapsedTime = 0;
-                SetPrivateProperties();
+                ArrivedAtDestination();
                 if (tag == "Player")
                 {
                     target.GetComponent<Block>().SetComplete();
@@ -201,10 +200,18 @@ public class Character : MonoBehaviour, Observer
     {
     }
 
-    public virtual void Notify()
+    protected void ArrivedAtDestination()
     {
-        throw new System.NotImplementedException();
+        SetPrivateProperties();
+        isJumping = false;
+        ElapsedTime = 0;
     }
 
-   
+    protected void DestroyMySelf()
+    {
+        isAlive = false;
+        //StopAllCoroutines();
+        Destroy(gameObject);
+    }
+
 }

@@ -101,8 +101,8 @@ public class SoundManager : MonoBehaviour
         _audioClips.Add(path, Resources.Load<AudioClip>(path));
     }
 
-    public void PlaySound(string sound)
+    public void PlaySound(string sound, float volume = 0.4f)
     {
-        _audioSource.PlayOneShot(_audioClips[sound]);
+        _audioSource.PlayOneShot(_audioClips[sound], volume);
     }
 }

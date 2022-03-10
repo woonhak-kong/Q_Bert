@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : Character
 {
+
+    public GameObject speachBubble;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -105,13 +108,47 @@ public class Player : Character
         base.SetPrivateProperties();
         //block.SetComplete();
         SetAnimatorPropertyDefault();
-        SoundManager.Instance.PlaySound(Sounds.QbertJump);
+        if (isJumping)
+        {
+            SoundManager.Instance.PlaySound(Sounds.QbertJump);
+        }
+
         GameManager.Instance().SetDistanceBetweenPlayerAndBlocks();
     }
 
     public void CollisionDetectedFromChild(Collider2D col)
     {
-        Debug.Log("Collision! " + col.name);
+        if (isOnSpinPad)
+            return;
+
+        if (col.tag == "Enemy")
+        {
+            speachBubble.SetActive(true);
+            SoundManager.Instance.PlaySound(Sounds.Speech1, 1.0f);
+            Time.timeScale = 0.0f;
+            StopAllCoroutines();
+            
+            StartCoroutine(RestartFromDeath());
+
+        }
+    }
+
+    // after collision death, restart game, reduce life, destroy all characters
+    IEnumerator RestartFromDeath()
+    {
+        yield return new WaitForSecondsRealtime(1.5f);
+        Debug.Log("Restart!");
+        Time.timeScale = 1.0f;
+        speachBubble.SetActive(false);
+        SetPositionImediately(GetBlockByIdx(m_previousIdx).transform);
+        m_currentPosition = m_previousIdx;
+        isJumping = false;
+        ArrivedAtDestination();
+
+        //destroy all characters
+        GameManager.Instance().NotifyObservers();
+        GameManager.Instance().RemoveAllObservers();
+
     }
 
 }

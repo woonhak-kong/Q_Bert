@@ -158,6 +158,12 @@ public class GameManager : MonoBehaviour
         _observers.Remove(ob);
     }
 
+    public void RemoveAllObservers()
+    {
+        _observers.Clear();
+        Debug.Log("Observer Count" + _observers.Count);
+    }
+
     public void NotifyObservers()
     {
         foreach (Observer ob in _observers)

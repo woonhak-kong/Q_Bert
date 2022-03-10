@@ -430,7 +430,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2014,6 +2014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad04c5ea27ba5549a3422be854a4986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speachBubble: {fileID: 1826960874}
 --- !u!114 &1089747342 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4378758600605444469, guid: 9ffbcafa7ad8dc947bdde8570dfbb2ce, type: 3}
@@ -3647,6 +3648,11 @@ MonoBehaviour:
   - {fileID: 1716036623}
   - {fileID: 1155049310}
   - {fileID: 1894678991}
+--- !u!1 &1826960874 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3520631456302827331, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+  m_PrefabInstance: {fileID: 9138693504613082485}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1845408745
 GameObject:
   m_ObjectHideFlags: 0
@@ -4149,7 +4155,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941024585}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 65129f64ae65b3e46a8aabe28ee973c5, type: 3}
@@ -4977,9 +4983,33 @@ PrefabInstance:
     m_TransformParent: {fileID: 1082836297}
     m_Modifications:
     - target: {fileID: 948682106970564713, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1082836299}
+    - target: {fileID: 948682106970564713, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
       propertyPath: character
       value: 
       objectReference: {fileID: 1082836299}
+    - target: {fileID: 1147585579041508617, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1147585579041508617, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1147585579041508617, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1147585579041508617, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.238
+      objectReference: {fileID: 0}
+    - target: {fileID: 3520631456302827331, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9138693503845781377, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
       propertyPath: m_Name
       value: Player

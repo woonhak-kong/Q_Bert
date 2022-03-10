@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Snake : Enemy
+public class Snake : Enemy, Observer
 {
   
     public bool IsHatched { get; set; }
@@ -95,8 +95,9 @@ public class Snake : Enemy
         StartCoroutine(StartSnakeAI());
     }
 
-    public override void Notify()
+    public void Notify()
     {
-        base.Notify();
+        //destory
+        DestroyMySelf();
     }
 }
