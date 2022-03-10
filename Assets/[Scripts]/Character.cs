@@ -206,8 +206,5 @@ public class Character : MonoBehaviour, Observer
         throw new System.NotImplementedException();
     }
 
-    public void CollisionDetectedFromChild(Collider2D col)
-    {
-        Debug.Log("Collision! " + col.name);
-    }
+   
 }

@@ -109,4 +109,9 @@ public class Player : Character
         GameManager.Instance().SetDistanceBetweenPlayerAndBlocks();
     }
 
+    public void CollisionDetectedFromChild(Collider2D col)
+    {
+        Debug.Log("Collision! " + col.name);
+    }
+
 }

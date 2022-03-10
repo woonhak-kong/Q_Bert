@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CollisionDetector : MonoBehaviour
 {
-    public Character character;
+    public Player player;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if (character)
+        if (player)
         {
-            character.CollisionDetectedFromChild(collision);
+            player.CollisionDetectedFromChild(collision);
         }
     }
 }
