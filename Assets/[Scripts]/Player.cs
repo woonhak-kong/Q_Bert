@@ -108,4 +108,5 @@ public class Player : Character
         SoundManager.Instance.PlaySound(Sounds.QbertJump);
         GameManager.Instance().SetDistanceBetweenPlayerAndBlocks();
     }
+
 }

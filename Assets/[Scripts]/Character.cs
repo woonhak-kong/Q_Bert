@@ -5,7 +5,7 @@ using UnityEngine;
 
 public delegate void Callback();
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, Observer
 {
     
     protected int m_currentPosition = 0;
@@ -201,4 +201,13 @@ public class Character : MonoBehaviour
     {
     }
 
+    public virtual void Notify()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void CollisionDetectedFromChild(Collider2D col)
+    {
+        Debug.Log("Collision! " + col.name);
+    }
 }

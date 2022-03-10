@@ -13,6 +13,8 @@ public class Snake : Enemy
         GameManager.Instance().NumOfSnake++;
         IsHatched = false;
         _animator = transform.GetChild(0).GetComponent<Animator>();
+
+        GameManager.Instance().AddObserver(this);
     }
 
     private IEnumerator StartSnakeAI()
@@ -91,5 +93,10 @@ public class Snake : Enemy
         IsHatched = true;
         transform.GetChild(0).GetComponent<Transform>().position = new Vector3(0.0f, 0.2f,0.0f);
         StartCoroutine(StartSnakeAI());
+    }
+
+    public override void Notify()
+    {
+        base.Notify();
     }
 }

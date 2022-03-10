@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     private bool _isPlayingGame = false;
 
+    private List<Observer> _observers = new List<Observer>();
+
     public int NumOfSnake { get; set; }
 
 
@@ -143,6 +145,24 @@ public class GameManager : MonoBehaviour
                 float distance = Vector2.Distance(obj.transform.position, _playerPosition.transform.position);
                 obj.GetComponent<Block>().DistanceFromPlayer = distance;
             }
+        }
+    }
+
+    public void AddObserver(Observer ob)
+    {
+        _observers.Add(ob);
+    }
+
+    public void RemoveObserver(Observer ob)
+    {
+        _observers.Remove(ob);
+    }
+
+    public void NotifyObservers()
+    {
+        foreach (Observer ob in _observers)
+        {
+            ob.Notify();
         }
     }
 }
