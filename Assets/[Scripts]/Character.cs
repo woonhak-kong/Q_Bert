@@ -67,26 +67,60 @@ public class Character : MonoBehaviour
         {
             Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)direction)];
 
-            if (block != null)
+            switch (direction)
             {
-                if (block.tag == "Spinpad" && this.tag != "Player")
-                    return;
-
+                case Block.Direction.LEFT_UP:
+                    _animator.SetBool("LeftUpJump", true);
+                    break;
+                case Block.Direction.RIGHT_UP:
+                    _animator.SetBool("RightUpJump", true);
+                    break;
+                case Block.Direction.LEFT_DOWN:
+                    _animator.SetBool("LeftDownJump", true);
+                    break;
+                case Block.Direction.RIGHT_DOWN:
+                    _animator.SetBool("RightDownJump", true);
+                    break;
+            }
+            // falling
+            if (block == null || (block.tag == "Spinpad" && this.tag != "Player"))
+            {
+                GameObject tmpGameObejct = new GameObject();
+                tmpGameObejct.transform.position = GetBlockByIdx(m_currentPosition).transform.position;
                 switch (direction)
                 {
                     case Block.Direction.LEFT_UP:
-                        _animator.SetBool("LeftUpJump", true);
+                    case Block.Direction.LEFT_DOWN:
+                        tmpGameObejct.transform.position += new Vector3(-1.2f, -1.5f, 0);
                         break;
                     case Block.Direction.RIGHT_UP:
-                        _animator.SetBool("RightUpJump", true);
-                        break;
-                    case Block.Direction.LEFT_DOWN:
-                        _animator.SetBool("LeftDownJump", true);
-                        break;
                     case Block.Direction.RIGHT_DOWN:
-                        _animator.SetBool("RightDownJump", true);
+                        tmpGameObejct.transform.position += new Vector3(+1.2f, -1.5f, 0);
                         break;
                 }
+                SetPosition(tmpGameObejct.transform, true);
+                Destroy(tmpGameObejct);
+            }
+            else if (block != null)
+            {
+                //if (block.tag == "Spinpad" && this.tag != "Player")
+                //    return;
+
+                //switch (direction)
+                //{
+                //    case Block.Direction.LEFT_UP:
+                //        _animator.SetBool("LeftUpJump", true);
+                //        break;
+                //    case Block.Direction.RIGHT_UP:
+                //        _animator.SetBool("RightUpJump", true);
+                //        break;
+                //    case Block.Direction.LEFT_DOWN:
+                //        _animator.SetBool("LeftDownJump", true);
+                //        break;
+                //    case Block.Direction.RIGHT_DOWN:
+                //        _animator.SetBool("RightDownJump", true);
+                //        break;
+                //}
 
                 // moving to next block
                 SetPosition(block.transform);
@@ -125,6 +159,7 @@ public class Character : MonoBehaviour
                     
                 //}
             }
+          
         }
     }
     protected Block GetBlockByIdx(int idx)
@@ -134,11 +169,11 @@ public class Character : MonoBehaviour
         return obj.GetComponent<Block>();
     }
 
-    protected void SetPosition(Transform blockTransform)
+    protected void SetPosition(Transform blockTransform, bool withDeath = false)
     {
        
         //Debug.Log(blockTransform.gameObject.name);
-        StartCoroutine(MoveToPosition(blockTransform));
+        StartCoroutine(MoveToPosition(blockTransform, withDeath));
         //transform.position = position;
 
     }
@@ -158,7 +193,7 @@ public class Character : MonoBehaviour
 
     }
 
-    protected virtual IEnumerator MoveToPosition(Transform target)
+    protected virtual IEnumerator MoveToPosition(Transform target, bool withDeath = false)
     {
         isJumping = true;
 
@@ -184,6 +219,11 @@ public class Character : MonoBehaviour
             if (Vector3.Distance(transform.position, position) < 0.0001f)
             {
                 //Debug.Log("arrived!");
+                if (withDeath)
+                {
+                    DestroyMySelf();
+                    break;
+                }
                 ArrivedAtDestination();
                 if (tag == "Player")
                 {

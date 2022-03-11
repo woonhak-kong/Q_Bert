@@ -25,8 +25,16 @@ public class GreenBall : Enemy, Observer
     protected override void SetEnemyBehaviorWhenAIDone()
     {
         base.SetEnemyBehaviorWhenAIDone();
+        int nextPosition = Random.Range(1, 3); // nerve return 3
+        if (nextPosition == 1)
+        {
+            MoveLeftDown();
+        }
+        else
+        {
+            MoveRightDown();
+        }
         GameManager.Instance().RemoveObserver(this);
-        DestroyMySelf();
     }
 
 
