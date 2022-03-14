@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     private PlaySceneUIController _uiController;
 
-    private int _leftLife = 2;
+    private int _leftLife;
 
 
 
@@ -61,11 +61,13 @@ public class GameManager : MonoBehaviour
             _blocksScript = GameObject.Find("Blocks").gameObject.GetComponent<Blocks>();
             _isPlayingGame = true;
             NumOfSnake = 0;
+            _leftLife = 2;
             //_enemySpawnCoroutine = EnemySpawn();
             StartCoroutine(EnemySpawn());
             _playerPosition = GameObject.Find("PlayerPosition");
             _uiController = GameObject.FindObjectOfType<PlaySceneUIController>();
             _uiController.ShowHowManyLifes(_leftLife);
+            RemoveAllObservers();
         }
         
     }
@@ -177,5 +179,21 @@ public class GameManager : MonoBehaviour
         {
             ob.Notify();
         }
+    }
+
+    public void PlayerDead()
+    {
+        _leftLife--;
+        _uiController.ShowHowManyLifes(_leftLife);
+        if (_leftLife <= 0)
+        {
+            // game over
+            _uiController.ShowGameOver();
+        }
+    }
+
+    public int GetLife()
+    {
+        return _leftLife;
     }
 }

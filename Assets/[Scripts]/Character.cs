@@ -91,11 +91,11 @@ public class Character : MonoBehaviour
                 {
                     case Block.Direction.LEFT_UP:
                     case Block.Direction.LEFT_DOWN:
-                        tmpGameObejct.transform.position += new Vector3(-3.2f, -5.5f, 0);
+                        tmpGameObejct.transform.position += new Vector3(-3.2f, -6.0f, 0);
                         break;
                     case Block.Direction.RIGHT_UP:
                     case Block.Direction.RIGHT_DOWN:
-                        tmpGameObejct.transform.position += new Vector3(+3.2f, -5.5f, 0);
+                        tmpGameObejct.transform.position += new Vector3(+3.2f, -6.0f, 0);
                         break;
                 }
                 switch (direction)
@@ -201,6 +201,11 @@ public class Character : MonoBehaviour
         }
         transform.position = position;
 
+    }
+    protected void SetPositionImediatelyOutOfScreen()
+    {
+        Vector2 position = new Vector2(0.0f, -30.0f);
+        transform.position = position;
     }
 
     protected virtual IEnumerator MoveToPosition(Transform target, bool withDeath = false)

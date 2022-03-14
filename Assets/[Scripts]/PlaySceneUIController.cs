@@ -10,6 +10,8 @@ public class PlaySceneUIController : MonoBehaviour
 
     public List<GameObject> Lifes;
 
+    public GameObject GameOverText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,5 +70,19 @@ public class PlaySceneUIController : MonoBehaviour
             Lifes[i].SetActive(true);
         }
     }
+
+    public void ShowGameOver()
+    {
+        GameOverText.SetActive(true);
+        StartCoroutine(GotoMainAfterFewMin());
+    }
+
+    private IEnumerator GotoMainAfterFewMin()
+    {
+        yield return new WaitForSeconds(3.0f);
+        OnClickToMain();
+    }
+
+    
 
 }

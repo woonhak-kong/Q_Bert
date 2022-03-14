@@ -139,19 +139,28 @@ public class Player : Character
     IEnumerator RestartFromDeath()
     {
         yield return new WaitForSecondsRealtime(1.5f);
-        Debug.Log("Restart!");
+        //Debug.Log("Restart!");
         Time.timeScale = 1.0f;
+        GameManager.Instance().PlayerDead();
         speachBubble.SetActive(false);
-        SetPositionImediately(GetBlockByIdx(m_previousIdx).transform);
-        m_currentPosition = m_previousIdx;
-        isJumping = false;
-        isAlive = true;
+        if (GameManager.Instance().GetLife() > 0)
+        {
+            SetPositionImediately(GetBlockByIdx(m_previousIdx).transform);
+            m_currentPosition = m_previousIdx;
+            isJumping = false;
+            isAlive = true;
+            ArrivedAtDestination();
+        }
+        else
+        {
+            StopAllCoroutines();
+            SetPositionImediatelyOutOfScreen();
+        }
         transform.GetChild(0).GetComponent<Renderer>().sortingLayerName = "Player";
-        ArrivedAtDestination();
+        
         //destroy all characters
         GameManager.Instance().NotifyObservers();
         GameManager.Instance().RemoveAllObservers();
-
     }
 
     protected override void FallingDown(Transform transform)
