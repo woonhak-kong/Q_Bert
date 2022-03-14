@@ -120,6 +120,8 @@ public class Player : Character
     {
         if (isOnSpinPad)
             return;
+        if (!isAlive)
+            return;
 
         if (col.tag == "Enemy")
         {
@@ -127,8 +129,8 @@ public class Player : Character
             SoundManager.Instance.PlaySound(Sounds.Speech1, 1.0f);
             Time.timeScale = 0.0f;
             StopAllCoroutines();
-            
-            StartCoroutine(RestartFromDeath());
+
+            Restart();
 
         }
     }
@@ -143,12 +145,26 @@ public class Player : Character
         SetPositionImediately(GetBlockByIdx(m_previousIdx).transform);
         m_currentPosition = m_previousIdx;
         isJumping = false;
+        isAlive = true;
+        transform.GetChild(0).GetComponent<Renderer>().sortingLayerName = "Player";
         ArrivedAtDestination();
-
         //destroy all characters
         GameManager.Instance().NotifyObservers();
         GameManager.Instance().RemoveAllObservers();
 
     }
 
+    protected override void FallingDown(Transform transform)
+    {
+        base.FallingDown(transform);
+        Restart();
+        SoundManager.Instance.PlaySound(Sounds.Fall);
+        isAlive = false;
+        SetPosition(transform, true);
+    }
+
+    public void Restart()
+    {
+        StartCoroutine(RestartFromDeath());
+    }
 }

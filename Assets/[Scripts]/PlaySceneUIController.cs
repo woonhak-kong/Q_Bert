@@ -8,6 +8,8 @@ public class PlaySceneUIController : MonoBehaviour
 
     public GameObject PauseUI;
 
+    public List<GameObject> Lifes;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,24 @@ public class PlaySceneUIController : MonoBehaviour
     {
         PauseUI.SetActive(active);
         Time.timeScale = active ? 0.0f : 1.0f;
+    }
+
+    public void ShowHowManyLifes(int num)
+    {
+        if (Lifes.Count < num)
+        {
+            Debug.Log("Error - out of range");
+            return;
+        }
+        foreach (var obj in Lifes)
+        {
+            obj.SetActive(false);
+        }
+
+        for (int i = 0; i < num; i++)
+        {
+            Lifes[i].SetActive(true);
+        }
     }
 
 }

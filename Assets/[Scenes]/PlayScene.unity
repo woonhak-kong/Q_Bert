@@ -2014,6 +2014,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ad04c5ea27ba5549a3422be854a4986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlive: 1
+  isJumping: 0
+  isOnSpinPad: 0
   speachBubble: {fileID: 1826960874}
 --- !u!114 &1089747342 stripped
 MonoBehaviour:
@@ -2394,7 +2397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1198841431
 Transform:
   m_ObjectHideFlags: 0
@@ -2662,7 +2665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1306128953
 Transform:
   m_ObjectHideFlags: 0
@@ -2769,6 +2772,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseUI: {fileID: 1016598039}
+  Lifes:
+  - {fileID: 563496322}
+  - {fileID: 593912880}
 --- !u!4 &1352484730
 Transform:
   m_ObjectHideFlags: 0
@@ -5065,6 +5071,14 @@ PrefabInstance:
     - target: {fileID: 9138693503845781378, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138693503845781379, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138693503845781379, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 827152777
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}

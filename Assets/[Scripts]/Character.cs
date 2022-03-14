@@ -91,14 +91,24 @@ public class Character : MonoBehaviour
                 {
                     case Block.Direction.LEFT_UP:
                     case Block.Direction.LEFT_DOWN:
-                        tmpGameObejct.transform.position += new Vector3(-1.2f, -1.5f, 0);
+                        tmpGameObejct.transform.position += new Vector3(-3.2f, -5.5f, 0);
                         break;
                     case Block.Direction.RIGHT_UP:
                     case Block.Direction.RIGHT_DOWN:
-                        tmpGameObejct.transform.position += new Vector3(+1.2f, -1.5f, 0);
+                        tmpGameObejct.transform.position += new Vector3(+3.2f, -5.5f, 0);
                         break;
                 }
-                SetPosition(tmpGameObejct.transform, true);
+                switch (direction)
+                {
+                    case Block.Direction.LEFT_UP:
+                    case Block.Direction.RIGHT_UP:
+                        transform.GetChild(0).GetComponent<Renderer>().sortingLayerName = "Background";
+                        break;
+                }
+
+                FallingDown(tmpGameObejct.transform);
+                //SetPosition(tmpGameObejct.transform, true);
+                //Debug.Log("dddd");
                 Destroy(tmpGameObejct);
             }
             else if (block != null)
@@ -200,6 +210,11 @@ public class Character : MonoBehaviour
         Vector3 currentPosition = transform.position;
         Vector2 position = target.position;
 
+        if (withDeath)
+            FinishTime = 1.5f;
+        else
+            FinishTime = 0.5f;
+
         if (target.gameObject.GetComponent<SpinPad>() != null)
         {
             position.y += (target.localScale.y / _offsetOfPinpadPosition);
@@ -221,6 +236,8 @@ public class Character : MonoBehaviour
                 //Debug.Log("arrived!");
                 if (withDeath)
                 {
+                    if (tag == "Player")
+                        break;
                     DestroyMySelf();
                     break;
                 }
@@ -252,6 +269,11 @@ public class Character : MonoBehaviour
         isAlive = false;
         //StopAllCoroutines();
         Destroy(gameObject);
+    }
+
+    protected virtual void FallingDown(Transform transform)
+    {
+
     }
 
 }

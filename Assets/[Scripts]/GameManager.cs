@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject redball;
     public GameObject greenBall;
     public GameObject snake;
+    public int NumOfSnake { get; set; }
 
     [SerializeField]
     private Blocks _blocksScript;
@@ -20,7 +21,11 @@ public class GameManager : MonoBehaviour
 
     private List<Observer> _observers = new List<Observer>();
 
-    public int NumOfSnake { get; set; }
+    private PlaySceneUIController _uiController;
+
+    private int _leftLife = 2;
+
+
 
 
 
@@ -59,6 +64,8 @@ public class GameManager : MonoBehaviour
             //_enemySpawnCoroutine = EnemySpawn();
             StartCoroutine(EnemySpawn());
             _playerPosition = GameObject.Find("PlayerPosition");
+            _uiController = GameObject.FindObjectOfType<PlaySceneUIController>();
+            _uiController.ShowHowManyLifes(_leftLife);
         }
         
     }

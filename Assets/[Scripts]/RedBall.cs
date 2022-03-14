@@ -43,4 +43,10 @@ public class RedBall : Enemy, Observer
         //destory
         DestroyMySelf();
     }
+
+    protected override void FallingDown(Transform transform)
+    {
+        base.FallingDown(transform);
+        SetPosition(transform, true);
+    }
 }
