@@ -7,6 +7,8 @@ public class Player : Character
 
     public GameObject speachBubble;
 
+    private bool isDeadFalling = false;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -145,8 +147,18 @@ public class Player : Character
         speachBubble.SetActive(false);
         if (GameManager.Instance().GetLife() > 0)
         {
-            SetPositionImediately(GetBlockByIdx(m_previousIdx).transform);
-            m_currentPosition = m_previousIdx;
+            if (isDeadFalling)
+            {
+                SetPositionImediately(GetBlockByIdx(0).transform);
+                m_currentPosition = 0;
+                m_previousIdx = 0;
+                isDeadFalling = false;
+            }
+            else
+            {
+                SetPositionImediately(GetBlockByIdx(m_previousIdx).transform);
+                m_currentPosition = m_previousIdx;
+            }
             isJumping = false;
             isAlive = true;
             ArrivedAtDestination();
@@ -166,6 +178,7 @@ public class Player : Character
     protected override void FallingDown(Transform transform)
     {
         base.FallingDown(transform);
+        isDeadFalling = true;
         Restart();
         SoundManager.Instance.PlaySound(Sounds.Fall);
         isAlive = false;
