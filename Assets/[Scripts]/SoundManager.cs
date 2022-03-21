@@ -18,6 +18,8 @@ public class Sounds
     public static string JellyJump = "Sounds/JellyJump";
     public static string CoilJump = "Sounds/CoilJump";
 
+    public static string CoilFall = "Sounds/snake-fall";
+
 
 
 }
@@ -69,6 +71,7 @@ public class SoundManager : MonoBehaviour
         AddSounds(Sounds.CoilJump);
         AddSounds(Sounds.Lift);
         AddSounds(Sounds.Fall);
+        AddSounds(Sounds.CoilFall);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

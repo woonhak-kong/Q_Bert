@@ -141,6 +141,7 @@ public class Snake : Enemy, Observer
         base.FallingDown(transform);
         Debug.Log("Coilly falling");
         GameManager.Instance().RemoveObserver(this);
+        SoundManager.Instance.PlaySound(Sounds.CoilFall);
         SetPosition(transform, true);
     }
 
