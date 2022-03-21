@@ -146,12 +146,17 @@ public class Snake : Enemy, Observer
     public void Notify()
     {
         //destory
-    
-        DestroyMySelf();
+        isAlive = false;
+        //StopAllCoroutines();
+        GameManager.Instance().NumOfSnake--;
+        Destroy(gameObject);
+        //DestroyMySelf();
     }
     protected override void DestroyMySelf()
     {
         GameManager.Instance().NumOfSnake--;
+        GameManager.Instance().NotifyObservers();
+        GameManager.Instance().RemoveAllObservers();
         base.DestroyMySelf();
     }
 }
