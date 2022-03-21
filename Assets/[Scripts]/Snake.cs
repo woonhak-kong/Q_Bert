@@ -7,6 +7,11 @@ public class Snake : Enemy, Observer
   
     public bool IsHatched { get; set; }
 
+    private Player _player;
+
+    private bool _isSetToFall = false;
+    private bool _isPlayerRight;
+
     public override void Start()
     {
         base.Start();
@@ -15,6 +20,7 @@ public class Snake : Enemy, Observer
         _animator = transform.GetChild(0).GetComponent<Animator>();
 
         GameManager.Instance().AddObserver(this);
+        _player = GameObject.Find("PlayerPosition").GetComponent<Player>();
     }
 
     private IEnumerator StartSnakeAI()
@@ -24,38 +30,72 @@ public class Snake : Enemy, Observer
             //Debug.Log("in Snake, StartAI");
             yield return new WaitForSeconds(1.0f);
 
-            // it is not snake yet.
-            //Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)Block.Direction.RIGHT_UP)];
-
-            float dist = float.MaxValue;
-            int shortestIdx = 0;
-            for (int i = 0; i < 4; i++)
+            if (!_isSetToFall)
             {
-                Block block = GetBlockByIdx(m_currentPosition).m_blocks[i];
-                if (block != null)
+                _isSetToFall = _player.isOnSpinPad;
+                _isPlayerRight =  GameManager.Instance().GetBlocksScript().gameObject.transform.position.x < _player.transform.position.x;
+                // it is not snake yet.
+                //Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)Block.Direction.RIGHT_UP)];
+
+                float dist = float.MaxValue;
+                int shortestIdx = 0;
+                for (int i = 0; i < 4; i++)
                 {
-                    if (dist > block.DistanceFromPlayer)
+                    Block block = GetBlockByIdx(m_currentPosition).m_blocks[i];
+                    if (block != null)
                     {
-                        dist = block.DistanceFromPlayer;
-                        shortestIdx = i;
+                        if (dist > block.DistanceFromPlayer)
+                        {
+                            dist = block.DistanceFromPlayer;
+                            shortestIdx = i;
+                        }
                     }
                 }
+
+                Move((Block.Direction)shortestIdx);
+               
             }
+            // go to fall down
+            else
+            {
+                float dist = float.MaxValue;
+                int shortestIdx = 0;
+                for (int i = 0; i < 4; i++)
+                {
+                    Block block = GetBlockByIdx(m_currentPosition).m_blocks[i];
+                    if (block != null)
+                    {
+                        float distanceSpinpad = 0;
+                        if (_isPlayerRight)
+                            distanceSpinpad = block.DistanceFromRightSpinPad;
+                        else
+                            distanceSpinpad = block.DistanceFromLeftSpinPad;
+                        if (dist > distanceSpinpad)
+                        {
+                            dist = distanceSpinpad;
+                            shortestIdx = i;
+                        }
+                    }
+                }
 
-            Move((Block.Direction)shortestIdx);
-            //if (block != null)
-            //{
-            //    int nextPosition = Random.Range(1, 3); // nerve return 3
-            //    if (nextPosition == 1)
-            //    {
-            //        MoveLeftUp();
-            //    }
-            //    else
-            //    {
-            //        MoveRightUp();
-            //    }
-            //}
-
+                if (_isPlayerRight)
+                {
+                    if (GetBlockByIdx(m_currentPosition).DistanceFromRightSpinPad < GetBlockByIdx(m_currentPosition)
+                            .m_blocks[shortestIdx].DistanceFromRightSpinPad)
+                    {
+                        Move(Block.Direction.RIGHT_UP);
+                    }
+                }
+                else
+                {
+                    if (GetBlockByIdx(m_currentPosition).DistanceFromLeftSpinPad < GetBlockByIdx(m_currentPosition)
+                            .m_blocks[shortestIdx].DistanceFromLeftSpinPad)
+                    {
+                        Move(Block.Direction.LEFT_UP);
+                    }
+                }
+                Move((Block.Direction)shortestIdx);
+            }
         }
     }
 
@@ -95,9 +135,23 @@ public class Snake : Enemy, Observer
         StartCoroutine(StartSnakeAI());
     }
 
+    protected override void FallingDown(Transform transform)
+    {
+        base.FallingDown(transform);
+        Debug.Log("Coilly falling");
+        GameManager.Instance().RemoveObserver(this);
+        SetPosition(transform, true);
+    }
+
     public void Notify()
     {
         //destory
+    
         DestroyMySelf();
+    }
+    protected override void DestroyMySelf()
+    {
+        GameManager.Instance().NumOfSnake--;
+        base.DestroyMySelf();
     }
 }

@@ -47,6 +47,7 @@ public class RedBall : Enemy, Observer
     protected override void FallingDown(Transform transform)
     {
         base.FallingDown(transform);
+        //GameManager.Instance().RemoveObserver(this);
         SetPosition(transform, true);
     }
 }

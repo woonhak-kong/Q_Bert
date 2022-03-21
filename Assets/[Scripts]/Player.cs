@@ -145,7 +145,7 @@ public class Player : Character
         Time.timeScale = 1.0f;
         GameManager.Instance().PlayerDead();
         speachBubble.SetActive(false);
-        if (GameManager.Instance().GetLife() > 0)
+        if (GameManager.Instance().GetLife() >= 0)
         {
             if (isDeadFalling)
             {

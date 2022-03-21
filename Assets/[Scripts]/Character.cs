@@ -269,7 +269,7 @@ public class Character : MonoBehaviour
         ElapsedTime = 0;
     }
 
-    protected void DestroyMySelf()
+    virtual protected void DestroyMySelf()
     {
         isAlive = false;
         //StopAllCoroutines();

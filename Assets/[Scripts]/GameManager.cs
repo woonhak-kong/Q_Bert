@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
     private Blocks _blocksScript;
 
     private GameObject _playerPosition;
+    private GameObject _leftSpinpad;
+    private GameObject _rightSpinpad;
 
     private static GameManager instance = null;
 
     private bool _isPlayingGame = false;
 
-    private List<Observer> _observers = new List<Observer>();
+    public List<Observer> _observers = new List<Observer>();
 
     private PlaySceneUIController _uiController;
 
@@ -65,9 +67,12 @@ public class GameManager : MonoBehaviour
             //_enemySpawnCoroutine = EnemySpawn();
             StartCoroutine(EnemySpawn());
             _playerPosition = GameObject.Find("PlayerPosition");
+            _leftSpinpad = GameObject.Find("LeftPadOrigin");
+            _rightSpinpad = GameObject.Find("RightPadOrigin");
             _uiController = GameObject.FindObjectOfType<PlaySceneUIController>();
             _uiController.ShowHowManyLifes(_leftLife);
             RemoveAllObservers();
+            SetDistanceBetweenSpinpadAndBlocks();
         }
         
     }
@@ -157,6 +162,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetDistanceBetweenSpinpadAndBlocks()
+    {
+        GameObject[] blocks = GetBlocksScript().GetBlocks();
+        foreach (GameObject obj in blocks)
+        {
+            if (obj != null)
+            {
+                float distance = Vector2.Distance(obj.transform.position, _leftSpinpad.transform.position);
+                obj.GetComponent<Block>().DistanceFromLeftSpinPad = distance;
+                distance = Vector2.Distance(obj.transform.position, _rightSpinpad.transform.position);
+                obj.GetComponent<Block>().DistanceFromRightSpinPad = distance;
+            }
+        }
+    }
+
     public void AddObserver(Observer ob)
     {
         _observers.Add(ob);
@@ -185,7 +205,7 @@ public class GameManager : MonoBehaviour
     {
         _leftLife--;
         _uiController.ShowHowManyLifes(_leftLife);
-        if (_leftLife <= 0)
+        if (_leftLife < 0)
         {
             // game over
             _uiController.ShowGameOver();

@@ -18,11 +18,25 @@ public class Block : MonoBehaviour
     protected bool isComplete = false;
 
     private float _distanceFromPlayer = 0.0f;
+    public float _distanceFromLeftSpinPad = 0.0f;
+    public float _distanceFromRightSpinPad = 0.0f;
 
     public float DistanceFromPlayer
     {
         set => _distanceFromPlayer = value;
         get => _distanceFromPlayer;
+    }
+
+    public float DistanceFromLeftSpinPad
+    {
+        set => _distanceFromLeftSpinPad = value;
+        get => _distanceFromLeftSpinPad;
+    }
+
+    public float DistanceFromRightSpinPad
+    {
+        set => _distanceFromRightSpinPad = value;
+        get => _distanceFromRightSpinPad;
     }
 
     public virtual void SetComplete()
