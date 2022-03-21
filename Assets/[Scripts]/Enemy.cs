@@ -28,6 +28,12 @@ public class Enemy : Character
         while (isAlive)
         {
             yield return new WaitForSeconds(m_Speed);
+            if (isFreezing)
+            {
+                yield return new WaitForSeconds(4.0f);
+                isFreezing = false;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+            }
             Block block = GetBlockByIdx(m_currentPosition).m_blocks[((int)Block.Direction.RIGHT_DOWN)];
 
             if (block != null)

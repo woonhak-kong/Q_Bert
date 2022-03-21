@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
     public bool isAlive = true;
     public bool isJumping = false;
     public bool isOnSpinPad = false;
+    public bool isFreezing = false;
 
     protected float ElapsedTime = 0;
     protected float FinishTime = 0.5f;

@@ -30,6 +30,13 @@ public class Snake : Enemy, Observer
             //Debug.Log("in Snake, StartAI");
             yield return new WaitForSeconds(1.0f);
 
+            if (isFreezing)
+            {
+                yield return new WaitForSeconds(4.0f);
+                isFreezing = false;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.white;
+            }
+
             if (!_isSetToFall)
             {
                 _isSetToFall = _player.isOnSpinPad;
@@ -156,6 +163,10 @@ public class Snake : Enemy, Observer
                 GameManager.Instance().NumOfSnake--;
                 Destroy(gameObject);
                 //DestroyMySelf();
+                break;
+            case "freeze":
+                isFreezing = true;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.blue;
                 break;
         }
        

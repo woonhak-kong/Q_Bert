@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance = null;
 
     private bool _isPlayingGame = false;
+    private bool _isFreezed = false;
 
     private List<Observer> _observers = new List<Observer>();
 
@@ -94,6 +95,11 @@ public class GameManager : MonoBehaviour
         while (_isPlayingGame)
         {
             yield return new WaitForSeconds(2.2f);
+            if (_isFreezed)
+            {
+                yield return new WaitForSeconds(5.0f);
+                _isFreezed = false;
+            }
             if (IsCoilyDead)
             {
                 yield return new WaitForSeconds(5.0f);
@@ -207,6 +213,14 @@ public class GameManager : MonoBehaviour
         {
             ob.Notify("die");
         }
+    }
+    public void NotifyObserversFreeze()
+    {
+        foreach (Observer ob in _observers)
+        {
+            ob.Notify("freeze");
+        }
+        _isFreezed = true;
     }
 
     public void PlayerDead()

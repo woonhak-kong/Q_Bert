@@ -46,8 +46,11 @@ public class RedBall : Enemy, Observer
                 //destory
                 DestroyMySelf();
                 break;
+            case "freeze":
+                isFreezing = true;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.blue;
+                break;
         }
-       
     }
 
     protected override void FallingDown(Transform transform)

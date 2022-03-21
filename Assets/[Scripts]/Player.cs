@@ -133,7 +133,13 @@ public class Player : Character
             StopAllCoroutines();
 
             Restart();
+        }
 
+        if (col.tag == "Green")
+        {
+            GameManager.Instance().NotifyObserversFreeze();
+            GameManager.Instance().RemoveObserver( col.gameObject.GetComponentInParent<GreenBall>());
+            Destroy(col.transform.parent.gameObject);
         }
     }
 

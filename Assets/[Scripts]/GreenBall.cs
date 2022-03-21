@@ -47,6 +47,10 @@ public class GreenBall : Enemy, Observer
                 //destory
                 DestroyMySelf();
                 break;
+            case "freeze":
+                isFreezing = true;
+                transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.blue;
+                break;
         }
         
     }
