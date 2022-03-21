@@ -171,7 +171,7 @@ public class Player : Character
         transform.GetChild(0).GetComponent<Renderer>().sortingLayerName = "Player";
         
         //destroy all characters
-        GameManager.Instance().NotifyObservers();
+        GameManager.Instance().NotifyObserversDie();
         GameManager.Instance().RemoveAllObservers();
     }
 

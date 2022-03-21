@@ -145,19 +145,25 @@ public class Snake : Enemy, Observer
         SetPosition(transform, true);
     }
 
-    public void Notify()
+    public void Notify(string message)
     {
-        //destory
-        isAlive = false;
-        //StopAllCoroutines();
-        GameManager.Instance().NumOfSnake--;
-        Destroy(gameObject);
-        //DestroyMySelf();
+        switch (message)
+        {
+            case "die":
+                //destory
+                isAlive = false;
+                //StopAllCoroutines();
+                GameManager.Instance().NumOfSnake--;
+                Destroy(gameObject);
+                //DestroyMySelf();
+                break;
+        }
+       
     }
     protected override void DestroyMySelf()
     {
         GameManager.Instance().NumOfSnake--;
-        GameManager.Instance().NotifyObservers();
+        GameManager.Instance().NotifyObserversDie();
         GameManager.Instance().RemoveAllObservers();
         GameManager.Instance().IsCoilyDead = true;
         base.DestroyMySelf();

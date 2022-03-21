@@ -201,11 +201,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Observer Count" + _observers.Count);
     }
 
-    public void NotifyObservers()
+    public void NotifyObserversDie()
     {
         foreach (Observer ob in _observers)
         {
-            ob.Notify();
+            ob.Notify("die");
         }
     }
 

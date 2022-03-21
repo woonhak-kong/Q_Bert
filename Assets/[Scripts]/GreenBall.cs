@@ -39,10 +39,16 @@ public class GreenBall : Enemy, Observer
 
 
 
-    public void Notify()
+    public void Notify(string message)
     {
-        //destory
-        DestroyMySelf();
+        switch (message)
+        {
+            case "die":
+                //destory
+                DestroyMySelf();
+                break;
+        }
+        
     }
 
     protected override void FallingDown(Transform transform)
