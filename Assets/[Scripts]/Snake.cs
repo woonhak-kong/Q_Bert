@@ -157,6 +157,7 @@ public class Snake : Enemy, Observer
         GameManager.Instance().NumOfSnake--;
         GameManager.Instance().NotifyObservers();
         GameManager.Instance().RemoveAllObservers();
+        GameManager.Instance().IsCoilyDead = true;
         base.DestroyMySelf();
     }
 }

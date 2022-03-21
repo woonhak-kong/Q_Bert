@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject greenBall;
     public GameObject snake;
     public int NumOfSnake { get; set; }
+    public bool IsCoilyDead { get; set; } = false;
+    public bool IsPlayerDead { get; set; } = false;
 
     [SerializeField]
     private Blocks _blocksScript;
@@ -21,16 +23,13 @@ public class GameManager : MonoBehaviour
 
     private bool _isPlayingGame = false;
 
-    public List<Observer> _observers = new List<Observer>();
+    private List<Observer> _observers = new List<Observer>();
 
     private PlaySceneUIController _uiController;
 
     private int _leftLife;
 
-
-
-
-
+    
     private GameManager(){}
     public static GameManager Instance()
     {
@@ -95,7 +94,16 @@ public class GameManager : MonoBehaviour
         while (_isPlayingGame)
         {
             yield return new WaitForSeconds(2.2f);
-
+            if (IsCoilyDead)
+            {
+                yield return new WaitForSeconds(5.0f);
+                IsCoilyDead = false;
+            }
+            if (IsPlayerDead)
+            {
+                yield return new WaitForSeconds(2.0f);
+                IsPlayerDead = false;
+            }
             if (NumOfSnake <= 0 && snakeReady >= 3) // if there is no snake
             {
                 //make snake
@@ -210,6 +218,7 @@ public class GameManager : MonoBehaviour
             // game over
             _uiController.ShowGameOver();
         }
+        IsPlayerDead = true;
     }
 
     public int GetLife()
