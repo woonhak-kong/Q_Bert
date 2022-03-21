@@ -58,6 +58,7 @@ public class Snake : Enemy, Observer
             // go to fall down
             else
             {
+                _isSetToFall = _player.isOnSpinPad;
                 float dist = float.MaxValue;
                 int shortestIdx = 0;
                 for (int i = 0; i < 4; i++)
