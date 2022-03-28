@@ -51,6 +51,11 @@ public class Block : MonoBehaviour
                 {
                     GetComponent<SpriteRenderer>().sprite = sprite;
                     GameManager.Instance().UiController.AddScore(25);
+                    Blocks.NumOfNonCompleteBlock--;
+                    if (Blocks.NumOfNonCompleteBlock == 0)
+                    {
+                        GameManager.Instance().UiController.AddScore(1000);
+                    }
                     break;
                 }
             }

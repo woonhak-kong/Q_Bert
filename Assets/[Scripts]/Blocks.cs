@@ -10,6 +10,8 @@ public class Blocks : MonoBehaviour
     private GameObject[] _blocks;
     private Transform[] _transfrom;
 
+    public static int NumOfNonCompleteBlock;
+
 
     private void Awake()
     {
@@ -27,6 +29,11 @@ public class Blocks : MonoBehaviour
             }
         }
 
+    }
+
+    private void Start()
+    {
+        NumOfNonCompleteBlock = 28;
     }
 
     public GameObject[] GetBlocks()
