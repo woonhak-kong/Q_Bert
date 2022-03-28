@@ -140,6 +140,7 @@ public class Player : Character
             GameManager.Instance().NotifyObserversFreeze();
             GameManager.Instance().RemoveObserver( col.gameObject.GetComponentInParent<GreenBall>());
             Destroy(col.transform.parent.gameObject);
+            GameManager.Instance().UiController.AddScore(100);
         }
     }
 
