@@ -162,6 +162,7 @@ public class Snake : Enemy, Observer
                 //StopAllCoroutines();
                 GameManager.Instance().NumOfSnake--;
                 Destroy(gameObject);
+                
                 //DestroyMySelf();
                 break;
             case "freeze":
@@ -177,6 +178,7 @@ public class Snake : Enemy, Observer
         GameManager.Instance().NotifyObserversDie();
         GameManager.Instance().RemoveAllObservers();
         GameManager.Instance().IsCoilyDead = true;
+        GameManager.Instance().UiController.AddScore(500);
         base.DestroyMySelf();
     }
 }
