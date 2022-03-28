@@ -283,7 +283,10 @@ public class GameManager : MonoBehaviour
         {
             foreach (GameObject block in GetBlocksScript().GetBlocks())
             {
-                block.GetComponent<SpriteRenderer>().sprite = BlockSprites[count % 3];
+                if (block != null && block.tag == "block")
+                {
+                    block.GetComponent<SpriteRenderer>().sprite = BlockSprites[count % 3];
+                }
             }
 
             _uiController.ChangeToBox.GetComponent<SpriteRenderer>().sprite = BlockSprites[count % 3];
