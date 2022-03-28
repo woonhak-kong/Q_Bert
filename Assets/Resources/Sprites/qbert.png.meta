@@ -158,6 +158,9 @@ TextureImporter:
   - first:
       213: 2989107256592374547
     second: player_text_6
+  - first:
+      213: -6209024343592709592
+    second: block_pink_1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -1338,7 +1341,7 @@ TextureImporter:
         width: 51
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1359,7 +1362,7 @@ TextureImporter:
         width: 51
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1380,7 +1383,7 @@ TextureImporter:
         width: 51
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1401,7 +1404,7 @@ TextureImporter:
         width: 51
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1422,7 +1425,7 @@ TextureImporter:
         width: 51
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1430,6 +1433,27 @@ TextureImporter:
       bones: []
       spriteID: 31b1bb086317b7920800000000000000
       internalID: 2989107256592374547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: block_pink_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 822576e914d15d9a0800000000000000
+      internalID: -6209024343592709592
       vertices: []
       indices: 
       edges: []

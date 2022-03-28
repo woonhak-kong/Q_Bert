@@ -20,6 +20,8 @@ public class Sounds
 
     public static string CoilFall = "Sounds/snake-fall";
 
+    public static string Victory = "Sounds/victory";
+
 
 
 }
@@ -72,6 +74,7 @@ public class SoundManager : MonoBehaviour
         AddSounds(Sounds.Lift);
         AddSounds(Sounds.Fall);
         AddSounds(Sounds.CoilFall);
+        AddSounds(Sounds.Victory);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

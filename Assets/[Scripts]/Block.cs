@@ -56,6 +56,7 @@ public class Block : MonoBehaviour
                     {
                         GameManager.Instance().UiController.AddScore(1000);
                         GameManager.Instance().UiController.AddScore(100 * Blocks.NumOfSpinBlockLeft);
+                        GameManager.Instance().GameComplete();
                     }
                     break;
                 }

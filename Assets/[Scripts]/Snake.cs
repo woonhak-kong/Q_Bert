@@ -169,6 +169,9 @@ public class Snake : Enemy, Observer
                 isFreezing = true;
                 transform.GetChild(0).GetComponent<SpriteRenderer>().color = Color.blue;
                 break;
+            case "clear":
+                isCleared = true;
+                break;
         }
        
     }

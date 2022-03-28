@@ -14,6 +14,8 @@ public class PlaySceneUIController : MonoBehaviour
 
     public ScoreUI ScoreUI;
 
+    public GameObject ChangeToBox;
+
     // Start is called before the first frame update
     void Start()
     {

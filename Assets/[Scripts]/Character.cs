@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
     public bool isJumping = false;
     public bool isOnSpinPad = false;
     public bool isFreezing = false;
+    public bool isCleared = false;
 
     protected float ElapsedTime = 0;
     protected float FinishTime = 0.5f;
@@ -61,6 +62,9 @@ public class Character : MonoBehaviour
     }
     protected void Move(Block.Direction direction)
     {
+        if (!isAlive)
+            return;
+
         if (isOnSpinPad)
             return;
 
@@ -234,8 +238,11 @@ public class Character : MonoBehaviour
 
         while (isJumping)
         {
-            ElapsedTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(currentPosition, position, (ElapsedTime / FinishTime));
+            if (!isCleared)
+            {
+                ElapsedTime += Time.deltaTime;
+                transform.position = Vector3.Lerp(currentPosition, position, (ElapsedTime / FinishTime));
+            }
 
             yield return null;
             if (Vector3.Distance(transform.position, position) < 0.0001f)

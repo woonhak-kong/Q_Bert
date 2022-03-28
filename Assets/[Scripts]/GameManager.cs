@@ -160,6 +160,10 @@ public class GameManager : MonoBehaviour
     public void GameComplete()
     {
         _isPlayingGame = false;
+        SoundManager.Instance.PlaySound(Sounds.Victory);
+        _playerPosition.GetComponent<Player>().isAlive = false;
+        NotifyObserversClearGame();
+        StartCoroutine(GameClearSequence());
     }
 
     public void GameStop()
@@ -227,6 +231,14 @@ public class GameManager : MonoBehaviour
         _isFreezed = true;
     }
 
+    public void NotifyObserversClearGame()
+    {
+        foreach (Observer ob in _observers)
+        {
+            ob.Notify("clear");
+        }
+    }
+
     public void PlayerDead()
     {
         _leftLife--;
@@ -242,5 +254,43 @@ public class GameManager : MonoBehaviour
     public int GetLife()
     {
         return _leftLife;
+    }
+
+    public IEnumerator GameClearSequence()
+    {
+        
+        int count = 20;
+        Sprite[] SpritesData = Resources.LoadAll<Sprite>("Sprites/qbert");
+        Sprite[] BlockSprites = new Sprite[3];
+        foreach (Sprite sprite in SpritesData)
+        {
+            if (sprite.name == "block_pink_1")
+            {
+                BlockSprites[0] = sprite;
+            }
+
+            if (sprite.name == "block_yellow_1")
+            {
+                BlockSprites[1] = sprite;
+            }
+
+            if (sprite.name == "block_blue_1")
+            {
+                BlockSprites[2] = sprite;
+            }
+        }
+        while (count > 0)
+        {
+            foreach (GameObject block in GetBlocksScript().GetBlocks())
+            {
+                block.GetComponent<SpriteRenderer>().sprite = BlockSprites[count % 3];
+            }
+
+            _uiController.ChangeToBox.GetComponent<SpriteRenderer>().sprite = BlockSprites[count % 3];
+            count--;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        _uiController.OnClickToMain();
     }
 }

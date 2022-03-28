@@ -37,5 +37,11 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("3");
             m_player.MoveRightDown();
         }
+
+        // for debug
+        if (Input.GetButtonDown("ClearGame(Debug)"))
+        {
+            GameManager.Instance().GameComplete();
+        }
     }
 }
