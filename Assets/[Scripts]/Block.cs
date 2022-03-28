@@ -50,6 +50,7 @@ public class Block : MonoBehaviour
                 if (sprite.name == "block_yellow_1")
                 {
                     GetComponent<SpriteRenderer>().sprite = sprite;
+                    GameManager.Instance().UiController.AddScore(25);
                     break;
                 }
             }

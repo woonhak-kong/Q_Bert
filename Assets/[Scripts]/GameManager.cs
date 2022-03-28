@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public bool IsCoilyDead { get; set; } = false;
     public bool IsPlayerDead { get; set; } = false;
 
+    public PlaySceneUIController UiController {
+        get => _uiController;
+    }
+
     [SerializeField]
     private Blocks _blocksScript;
 

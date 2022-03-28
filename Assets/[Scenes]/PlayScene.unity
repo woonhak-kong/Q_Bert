@@ -2047,6 +2047,7 @@ MonoBehaviour:
   isAlive: 1
   isJumping: 0
   isOnSpinPad: 0
+  isFreezing: 0
   speachBubble: {fileID: 1826960874}
 --- !u!114 &1089747342 stripped
 MonoBehaviour:
@@ -5216,6 +5217,18 @@ PrefabInstance:
     - target: {fileID: 9138693503845781378, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138693503845781379, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138693503845781379, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138693503845781379, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9138693503845781379, guid: 2923a4677cf3ea54d8e884d8007bfa6a, type: 3}
       propertyPath: m_SortingLayer

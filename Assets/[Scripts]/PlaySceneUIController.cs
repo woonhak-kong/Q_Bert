@@ -12,6 +12,8 @@ public class PlaySceneUIController : MonoBehaviour
 
     public GameObject GameOverText;
 
+    public ScoreUI ScoreUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +83,11 @@ public class PlaySceneUIController : MonoBehaviour
     {
         yield return new WaitForSeconds(3.0f);
         OnClickToMain();
+    }
+
+    public void AddScore(int value)
+    {
+        ScoreUI.AddScore(value);
     }
 
     
