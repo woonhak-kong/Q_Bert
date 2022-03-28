@@ -55,6 +55,7 @@ public class Block : MonoBehaviour
                     if (Blocks.NumOfNonCompleteBlock == 0)
                     {
                         GameManager.Instance().UiController.AddScore(1000);
+                        GameManager.Instance().UiController.AddScore(100 * Blocks.NumOfSpinBlockLeft);
                     }
                     break;
                 }

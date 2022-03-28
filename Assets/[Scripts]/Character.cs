@@ -143,6 +143,7 @@ public class Character : MonoBehaviour
                 {
                     isOnSpinPad = true;
                     transform.parent = block.transform;
+                    Blocks.NumOfSpinBlockLeft--;
 
 
                     block.GetComponent<SpinPad>().StartSpinpadSequences(() =>

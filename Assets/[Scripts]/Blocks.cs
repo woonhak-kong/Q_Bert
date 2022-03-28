@@ -11,6 +11,7 @@ public class Blocks : MonoBehaviour
     private Transform[] _transfrom;
 
     public static int NumOfNonCompleteBlock;
+    public static int NumOfSpinBlockLeft;
 
 
     private void Awake()
@@ -34,6 +35,7 @@ public class Blocks : MonoBehaviour
     private void Start()
     {
         NumOfNonCompleteBlock = 28;
+        NumOfSpinBlockLeft = 2;
     }
 
     public GameObject[] GetBlocks()
