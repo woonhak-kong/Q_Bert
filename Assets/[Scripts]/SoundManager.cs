@@ -21,6 +21,7 @@ public class Sounds
     public static string CoilFall = "Sounds/snake-fall";
 
     public static string Victory = "Sounds/victory";
+    public static string EatingGreen = "Sounds/eating_green";
 
 
 
@@ -75,6 +76,7 @@ public class SoundManager : MonoBehaviour
         AddSounds(Sounds.Fall);
         AddSounds(Sounds.CoilFall);
         AddSounds(Sounds.Victory);
+        AddSounds(Sounds.EatingGreen);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
