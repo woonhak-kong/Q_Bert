@@ -212,7 +212,7 @@ public class GameManager : MonoBehaviour
     public void RemoveAllObservers()
     {
         _observers.Clear();
-        Debug.Log("Observer Count" + _observers.Count);
+        //Debug.Log("Observer Count" + _observers.Count);
     }
 
     public void NotifyObserversDie()
@@ -246,6 +246,7 @@ public class GameManager : MonoBehaviour
         if (_leftLife < 0)
         {
             // game over
+            ScoreRecoder.Instance.SaveScore(UiController.GetScore());
             _uiController.ShowGameOver();
         }
         IsPlayerDead = true;
@@ -268,7 +269,7 @@ public class GameManager : MonoBehaviour
             {
                 BlockSprites[0] = sprite;
             }
-
+            
             if (sprite.name == "block_yellow_1")
             {
                 BlockSprites[1] = sprite;
@@ -294,6 +295,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
+        ScoreRecoder.Instance.SaveScore(UiController.GetScore());
         _uiController.OnClickToMain();
     }
 }

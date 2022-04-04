@@ -92,6 +92,11 @@ public class PlaySceneUIController : MonoBehaviour
         ScoreUI.AddScore(value);
     }
 
+    public int GetScore()
+    {
+        return ScoreUI.GetScore();
+    }
+
     
 
 }

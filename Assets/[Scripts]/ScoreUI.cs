@@ -28,5 +28,10 @@ public class ScoreUI : MonoBehaviour
         SetScore(_mScore);
     }
 
+    public int GetScore()
+    {
+        return _mScore;
+    }
+
 
 }

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class MainMenuUIController : MonoBehaviour
 {
     public GameObject TitleCanvas;
     public GameObject ReaderBoardCanvas;
+    public Text ScoreListText;
 
     enum MenuState
     {
@@ -45,6 +47,13 @@ public class MainMenuUIController : MonoBehaviour
         _state = MenuState.READER_BOARD;
         TitleCanvas.SetActive(false);
         ReaderBoardCanvas.SetActive(true);
+
+        ScoreListText.text = "";
+        List<int> list = ScoreRecoder.Instance.GetScoreByList();
+        for (int i = 0; i < list.Count; i++)
+        {
+            ScoreListText.text += (i+1).ToString() + "   -    " + list[i].ToString() + "\n";
+        }
     }
 
     public void OnClickTitle()
